@@ -1,6 +1,10 @@
 pipeline {
     agent any
     
+    triggers {
+        githubPush() 
+    }
+
     environment {
         SONAR_SCANNER_PATH = '/opt/sonar-scanner/bin/sonar-scanner'
         JAVA_HOME = '/usr/lib/jvm/java-17-openjdk-amd64'
@@ -11,6 +15,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
+                cleanWs() 
                 git url: "https://github.com/AakashSuresh2003/template.git", branch: "main"
             }
         }
