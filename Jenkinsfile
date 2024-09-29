@@ -4,8 +4,8 @@ pipeline {
     environment {
         SONAR_SCANNER_PATH = '/opt/sonar-scanner/bin/sonar-scanner'
         JAVA_HOME = '/usr/lib/jvm/java-17-openjdk-amd64'
-        SONAR_HOST = "http://{{jenkins_host}}:9000"
-        SONAR_TOKEN = '{{sonar_token}}'  // Use Jenkins credentials for security
+        SONAR_HOST = "http://${env.JENKINS_URL.replace('http://','').replace(':8080','').replace('/','')}:9000"
+        SONAR_TOKEN = credentials('sonar-token')  // Use Jenkins credentials for security
     }
     
     stages {
